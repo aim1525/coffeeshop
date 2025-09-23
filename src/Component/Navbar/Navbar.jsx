@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,55 +32,60 @@ export default function Navbar() {
         </h1>
 
         {/* Navigation & Icons */}
-        <div className="flex items-center gap-18 ml-70"> {/* push everything as far right as possible */}
+        <div className="flex items-center gap-18 ml-70">
           <ul className="hidden md:flex uppercase text-xl font-medium py-6 gap-20">
-            {["Home", "Menu", "Services", "Blog", "About", "Contact"].map(
-              (item, i) => (
-                <li key={i}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="relative transition duration-300 hover:text-yellow-500 "
-                  >
-                    {item}
-                  </a>
-                </li>
-              )
-            )}
+            {[
+              { name: "Home", path: "/" },
+              { name: "Menu", path: "/menu" },
+              { name: "Services", path: "/services" },
+              { name: "Blog", path: "/blog" },
+              { name: "About", path: "/about" },
+              { name: "Contact", path: "/contact" },
+            ].map((item, i) => (
+              <li key={i}>
+                <Link
+                  to={item.path}
+                  className="relative transition duration-300 hover:text-yellow-500"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
 
+            {/* Shop Dropdown */}
             <li
               className="relative"
               onMouseEnter={() => setShopOpen(true)}
               onMouseLeave={() => setShopOpen(false)}
             >
-              <button className="relative transition duration-300 hover:text-yellow-500 uppercase
-              ">
+              <button className="relative transition duration-300 hover:text-yellow-500 uppercase">
                 Shop
               </button>
               {shopOpen && (
-                <ul className="absolute right-0 mt-3 bg-black/90 text-white rounded-lg shadow-lg w-40 py-2"> {/* dropdown aligned to right */}
+                <ul className="absolute right-0 mt-3 bg-black/90 text-white rounded-lg shadow-lg w-40 py-2">
                   <li>
-                    <a
-                      href="#products"
+                    <Link
+                      to="/shop"
                       className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition"
                     >
                       Products
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#cart"
+                    <Link
+                      to="/cart"
                       className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition"
                     >
                       Cart
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#checkout"
+                    <Link
+                      to="/checkout"
                       className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition"
                     >
                       Checkout
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               )}
@@ -124,19 +130,24 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden text-center py-6">
           <ul className="flex flex-col gap-8 uppercase font-medium text-white text-base">
-            {["Home", "Menu", "Services", "Blog", "About", "Contact"].map(
-              (item, i) => (
-                <li key={i}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="block hover:text-yellow-500 transition"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item}
-                  </a>
-                </li>
-              )
-            )}
+            {[
+              { name: "Home", path: "/" },
+              { name: "Menu", path: "/menu" },
+              { name: "Services", path: "/services" },
+              { name: "Blog", path: "/blog" },
+              { name: "About", path: "/about" },
+              { name: "Contact", path: "/contact" },
+            ].map((item, i) => (
+              <li key={i}>
+                <Link
+                  to={item.path}
+                  className="block hover:text-yellow-500 transition"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
             <li>
               <details>
                 <summary className="cursor-pointer hover:text-yellow-500">
@@ -144,31 +155,31 @@ export default function Navbar() {
                 </summary>
                 <ul className="mt-2">
                   <li>
-                    <a
-                      href="#products"
+                    <Link
+                      to="/shop"
                       className="block py-1 hover:text-yellow-500"
                       onClick={() => setMenuOpen(false)}
                     >
                       Products
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#cart"
+                    <Link
+                      to="/cart"
                       className="block py-1 hover:text-yellow-500"
                       onClick={() => setMenuOpen(false)}
                     >
                       Cart
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#checkout"
+                    <Link
+                      to="/checkout"
                       className="block py-1 hover:text-yellow-500"
                       onClick={() => setMenuOpen(false)}
                     >
                       Checkout
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </details>
