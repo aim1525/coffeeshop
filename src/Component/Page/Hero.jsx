@@ -9,10 +9,10 @@ function Hero() {
       className="h-screen bg-cover bg-center flex items-center justify-center text-center"
       style={{
         backgroundImage:
-          "url('https://preview.colorlib.com/theme/coffeeblend/images/bg_1.jpg')",
+          "url('https://images.unsplash.com/photo-1503481766315-7a586b20f66d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODJ8fGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D')",
       }}
     >
-      <div className="bg-black/60 w-full h-full flex flex-col items-center justify-center text-white px-4">
+      <div className="w-full h-full flex flex-col items-center justify-center text-white px-4">
         <p className="text-lg italic text-yellow-400 mb-2">Welcome</p>
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           AMAZING TASTE & BEAUTIFUL PLACE

@@ -31,14 +31,14 @@ export default function Navbar() {
         </h1>
 
         {/* Navigation & Icons */}
-        <div className="flex items-center gap-14 ml-auto"> {/* push everything as far right as possible */}
-          <ul className="hidden md:flex gap-10 uppercase font-medium text-base">
+        <div className="flex items-center gap-18 ml-70"> {/* push everything as far right as possible */}
+          <ul className="hidden md:flex uppercase text-xl font-medium py-6 gap-20">
             {["Home", "Menu", "Services", "Blog", "About", "Contact"].map(
               (item, i) => (
                 <li key={i}>
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="relative transition duration-300 hover:text-yellow-500 after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-yellow-500 hover:after:w-full after:transition-all after:duration-300"
+                    className="relative transition duration-300 hover:text-yellow-500 "
                   >
                     {item}
                   </a>
@@ -51,7 +51,8 @@ export default function Navbar() {
               onMouseEnter={() => setShopOpen(true)}
               onMouseLeave={() => setShopOpen(false)}
             >
-              <button className="relative transition duration-300 hover:text-yellow-500 after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 after:-bottom-1 after:bg-yellow-500 hover:after:w-full after:transition-all after:duration-300">
+              <button className="relative transition duration-300 hover:text-yellow-500 uppercase
+              ">
                 Shop
               </button>
               {shopOpen && (
@@ -121,7 +122,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 text-center py-6">
+        <div className="md:hidden text-center py-6">
           <ul className="flex flex-col gap-8 uppercase font-medium text-white text-base">
             {["Home", "Menu", "Services", "Blog", "About", "Contact"].map(
               (item, i) => (
