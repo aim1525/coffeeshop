@@ -10,6 +10,7 @@ import Shop from "./Component/Page/Shop";
 import Contact from "./Component/Page/Contact";
 import Hero from "./Component/Page/Hero";
 import Login from "./Component/Page/LogIn";
+import SignupForm from "./Component/Page/Signup";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupForm />} />
           {/* Future expansion */}
           <Route path="/cart" element={<div>Cart Page</div>} />
           <Route path="/checkout" element={<div>Checkout Page</div>} />
