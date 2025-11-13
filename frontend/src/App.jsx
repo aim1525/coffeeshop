@@ -11,6 +11,7 @@ import Contact from "./Component/Page/Contact";
 import Hero from "./Component/Page/Hero";
 import SignupForm from "./Component/Page/Signup";
 import LoginForm from "./Component/Page/Login";
+import SingleProduct from "./Component/Page/SingleProduct";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignupForm />} />
+          <Route path="/singleproduct" element={<SingleProduct />} />
           {/* Future expansion */}
           <Route path="/cart" element={<div>Cart Page</div>} />
           <Route path="/checkout" element={<div>Checkout Page</div>} />

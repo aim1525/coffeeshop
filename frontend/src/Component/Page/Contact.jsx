@@ -12,22 +12,7 @@ export default function Contact() {
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-
-        {/* NAVBAR */}
-        <header className="absolute top-0 left-0 w-full z-20 flex items-center justify-between px-10 py-6 text-white">
-          <h1 className="text-2xl font-bold tracking-wide">
-            COFFEE <span className="font-light">BLEND</span>
-          </h1>
-          <nav className="space-x-8 uppercase text-sm font-semibold">
-            <a href="/" className="hover:text-yellow-400 transition">Home</a>
-            <a href="/menu" className="hover:text-yellow-400 transition">Menu</a>
-            <a href="/services" className="hover:text-yellow-400 transition">Services</a>
-            <a href="/blog" className="hover:text-yellow-400 transition">Blog</a>
-            <a href="/about" className="hover:text-yellow-400 transition">About</a>
-            <a href="/shop" className="hover:text-yellow-400 transition">Shop</a>
-            <a href="/contact" className="text-yellow-400">Contact</a>
-          </nav>
-        </header>
+        
 
         {/* HERO TEXT */}
         <div className="relative z-10 text-center text-white">

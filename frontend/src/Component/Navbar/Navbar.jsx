@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -70,43 +69,47 @@ export default function Navbar() {
                 </li>
               ))}
 
-              {/* Shop Dropdown */}
-              <li
-                className="relative"
-                onMouseEnter={() => setShopOpen(true)}
-                onMouseLeave={() => setShopOpen(false)}
-              >
+              {/* ✅ Fixed Shop Dropdown */}
+              <li className="relative group">
                 <button className="relative transition duration-300 hover:text-yellow-500 uppercase">
                   Shop
                 </button>
-                {shopOpen && (
-                  <ul className="absolute right-0 mt-3 bg-black/90 text-white rounded-lg shadow-lg w-40 py-2 animate__animated animate__fadeIn">
-                    <li>
-                      <Link
-                        to="/shop"
-                        className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
-                      >
-                        Products
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/cart"
-                        className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
-                      >
-                        Cart
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/checkout"
-                        className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
-                      >
-                        Checkout
-                      </Link>
-                    </li>
-                  </ul>
-                )}
+
+                {/* Dropdown stays open while hovering inside */}
+                <ul className="absolute right-0 mt-3 bg-black/90 text-white rounded-lg shadow-lg w-40 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  <li>
+                    <Link
+                      to="/shop"
+                      className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
+                    >
+                      Shop
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/singleproduct"
+                      className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
+                    >
+                      Single Product
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/cart"
+                      className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
+                    >
+                      Cart
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/checkout"
+                      className="block px-4 py-2 hover:bg-yellow-500 hover:text-black transition-colors duration-300"
+                    >
+                      Checkout
+                    </Link>
+                  </li>
+                </ul>
               </li>
             </ul>
 

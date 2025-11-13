@@ -31,20 +31,6 @@ function App() {
 
   return (
     <div className="bg-[#0d0b0b] text-white font-sans">
-      {/* Navbar */}
-      <nav className="fixed w-full top-0 left-0 bg-black bg-opacity-60 text-white z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
-          <h1 className="text-2xl font-bold tracking-widest">COFFEE BLEND</h1>
-          <ul className="flex space-x-8 uppercase text-sm">
-            <li className="hover:text-yellow-400 cursor-pointer">Home</li>
-            <li className="hover:text-yellow-400 cursor-pointer">Menu</li>
-            <li className="hover:text-yellow-400 cursor-pointer">Services</li>
-            <li className="hover:text-yellow-400 cursor-pointer">Blog</li>
-            <li className="hover:text-yellow-400 cursor-pointer">About</li>
-            <li className="hover:text-yellow-400 cursor-pointer">Contact</li>
-          </ul>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section
