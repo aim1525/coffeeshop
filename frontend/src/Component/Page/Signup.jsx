@@ -11,22 +11,21 @@ export default function SignupForm() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [otp, setOtp] = useState("");
-  const [generatedOtp, setGeneratedOtp] = useState(null);
-  const [isOtpSent, setIsOtpSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
     if (!fullName || !phone || !email || !password || !confirmPassword) {
       toast.error("⚠️ Please fill all required fields");
       return;
     }
     if (password.length < 6) {
-      toast.warning("🔑 Password must be at least 6 characters");
+      toast.warning("Password must be at least 6 characters");
       return;
     }
     if (password !== confirmPassword) {
@@ -39,78 +38,114 @@ export default function SignupForm() {
     }
 
     setLoading(true);
-    setTimeout(async () => {
-      if (!isOtpSent) {
-        const newOtp = Math.floor(100000 + Math.random() * 900000);
-        setGeneratedOtp(newOtp);
-        setIsOtpSent(true);
-        setLoading(false);
-        toast.info(`✅ OTP sent successfully! (Your OTP: ${newOtp})`);
-      } else {
-        if (parseInt(otp) !== generatedOtp) {
-          setLoading(false);
-          toast.error("❌ Invalid OTP. Try again.");
-          return;
-        }
-        try {
-          await API.post("/register", { fullName, email, phone, password });
-          setLoading(false);
-          toast.success("🎉 Signup successful! Redirecting to login...");
-          setTimeout(() => navigate("/login"), 1500);
-        } catch (err) {
-          toast.error(err.response?.data?.message || "Registration failed");
-          setLoading(false);
-        }
-      }
-    }, 1500);
+
+    try {
+      await API.post("/register", { fullName, email, phone, password });
+      toast.success("🎉 Signup successful! Check your email to verify.");
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-900 to-black px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
       <form
         onSubmit={handleSignup}
-        className="bg-gray-800/90 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl w-full max-w-md border border-gray-700 mt-[50px]"
+        className="bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-2xl w-full max-w-md"
       >
-        <h2 className="text-3xl font-bold mb-6 text-center text-white">Create Account</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-white">
+          Create Account
+        </h2>
+
         <div className="mb-5">
           <label className="block mb-2 text-gray-300 text-sm">Full Name</label>
-          <input type="text" className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+          <input
+            type="text"
+            className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
         </div>
+
         <div className="mb-5">
           <label className="block mb-2 text-gray-300 text-sm">Email</label>
-          <input type="email" className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
+
         <div className="mb-5">
-          <label className="block mb-2 text-gray-300 text-sm">Phone Number</label>
-          <input type="tel" className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          <label className="block mb-2 text-gray-300 text-sm">Phone</label>
+          <input
+            type="tel"
+            className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
         </div>
+
         <div className="mb-5 relative">
           <label className="block mb-2 text-gray-300 text-sm">Password</label>
-          <input type={showPassword ? "text" : "password"} className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          <span className="absolute right-4 top-11 cursor-pointer text-gray-400" onClick={() => setShowPassword(!showPassword)}>
+          <input
+            type={showPassword ? "text" : "password"}
+            className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <span
+            className="absolute right-4 top-11 cursor-pointer text-gray-400"
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </span>
         </div>
+
         <div className="mb-5 relative">
           <label className="block mb-2 text-gray-300 text-sm">Confirm Password</label>
-          <input type={showConfirmPassword ? "text" : "password"} className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-          <span className="absolute right-4 top-11 cursor-pointer text-gray-400" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <span
+            className="absolute right-4 top-11 cursor-pointer text-gray-400"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
             {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </span>
         </div>
-        {isOtpSent && (
-          <div className="mb-5">
-            <label className="block mb-2 text-gray-300 text-sm">Enter OTP</label>
-            <input type="text" className="w-full py-3 px-4 rounded-xl bg-gray-700 border border-gray-600 text-white" value={otp} onChange={(e) => setOtp(e.target.value)} required />
-          </div>
-        )}
-        <button type="submit" disabled={loading} className={`w-full py-3 mb-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-xl shadow-lg ${loading ? "opacity-70" : ""}`}>
-          {loading ? (isOtpSent ? "Verifying..." : "Sending OTP...") : isOtpSent ? "Verify OTP" : "Signup"}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-3 mb-4 bg-yellow-500 text-black font-bold rounded-xl shadow-lg"
+        >
+          {loading ? "Creating..." : "Signup"}
         </button>
+
         <p className="text-center text-gray-300">
-          Already have an account? <span className="text-yellow-400 cursor-pointer font-semibold" onClick={() => navigate("/login")}>Login</span>
+          Already have an account?{" "}
+          <span
+            className="text-yellow-400 cursor-pointer font-semibold"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </span>
         </p>
       </form>
+
       <ToastContainer position="top-right" autoClose={2500} theme="dark" />
     </div>
   );

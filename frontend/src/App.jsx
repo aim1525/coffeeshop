@@ -1,42 +1,25 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./Component/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 
-import Menu from "./Component/Page/Menu";
-import Services from "./Component/Page/Services";
-import Blog from "./Component/Page/Blog";
-import About from "./Component/Page/About";
-import Shop from "./Component/Page/Shop";
-import Contact from "./Component/Page/Contact";
-import Hero from "./Component/Page/Hero";
-import SignupForm from "./Component/Page/Signup";
 import LoginForm from "./Component/Page/Login";
-import SingleProduct from "./Component/Page/SingleProduct";
+import SignupForm from "./Component/Page/Signup";
+import VerifyEmail from "./Component/auth/VerifyEmail";
+import Dashboard from "./Component/Dashboard";
+import Hero from "./Component/Page/Hero";
 
-
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
-      <div className="pt-16">
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/singleproduct" element={<SingleProduct />} />
-          {/* Future expansion */}
-          <Route path="/cart" element={<div>Cart Page</div>} />
-          <Route path="/checkout" element={<div>Checkout Page</div>} />
-        </Routes>
-      </div>
-    </div>
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/verify/:token" element={<VerifyEmail />} />
+
+        {/* Protected / Test page */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/hero" element={<Hero />} />
+
+        {/* Default */}
+        <Route path="*" element={<Hero />} />
+      </Routes>
   );
 }
-
-export default App;
